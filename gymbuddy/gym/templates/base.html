@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+{% load static i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+{% get_available_languages as LANGUAGES %}
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}GymBuddy{% endblock title %}</title>
+    <link rel="stylesheet" href="{% static "css/base_style.css" %}">
+    <link rel="icon" href="{% static 'img/icon.svg' %}" type="image/svg">
+    <style>
+        .logo a:hover img {
+            content: url("{% static 'img/icon2.svg' %}");
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <ul class="nav">
+        {% if user.is_authenticated %}
+            {% if user.profile.is_complete %}
+                    <li class="logo">
+                        <a href="{% url "index" %}">
+                            <img src="{% static 'img/icon.svg' %}" alt="Logo Image">
+                        </a>
+                    </li>
+                    <li><a href="{% url "index" %}">{% trans "home"|title %}</a></li>
+                    <li>{% trans "meal planner"|capfirst %}</li>
+                    <li>{% trans "workout planner"|title %}</li>
+                    <li>{% trans "calories counter"|title %}</li>
+                    <li class="spacer"></li>
+                    {% if user.is_superuser or user.is_staff %}
+                    <li><a href="{% url "admin:index" %}">{% trans "admin"|title %}</a></li>
+                    {% endif %}
+                    <li><a href="{% url "profile" %}">{% trans "My profile"|title %}</a></li>
+                    <li><a href="{% url "logout" %}">{% trans "logout"|title %}</a></li>
+            {% endif %}
+        {% endif %}
+        <li>
+            <form class="inline-form" action="{% url "set_language" %}" method="post">
+                {% csrf_token %}
+                <select name="language" onchange="this.form.submit();">
+                    {% for language_code, language_name in LANGUAGES %}
+                    <option value="{{ language_code }}" {% if language_code == LANGUAGE_CODE %}selected{% endif %}>
+                        {{ language_name }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </form>
+        </li>
+        </ul>
+    </header>    
+    <main>
+        {% if messages %}
+        {% for message in messages %}
+            <div class="box box-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+        {% endif %}
+        {% block content %}
+        {% endblock content %}
+    </main>
+    <footer>
+        <p>&copy;<a href="{% url "index" %}">{% trans "GymBuddy" %}</a></p>
+    </footer>
+</body>
+</html>

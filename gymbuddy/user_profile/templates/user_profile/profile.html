@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% block title %}{{ user }}{% trans " profile at" %} {{ block.super }}{% endblock title %}
+{% block content %}
+<h1>{{ user }} {% trans "profile" %}</h1>
+<p><strong>{% trans "full name"|capfirst %}</strong>: {{ user.first_name}} {{ user.last_name}} </p>
+<p><strong>{% trans "email"|capfirst %}</strong>: {{ user.email }}
+<p><a href="{% url "profile_update" %}" class="btn">{% trans "update"|capfirst %}</a></p>
+{% endblock content %}</p>
