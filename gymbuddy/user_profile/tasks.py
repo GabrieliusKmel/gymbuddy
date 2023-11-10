@@ -1,15 +1,16 @@
 from celery import shared_task
+from openai import OpenAI
 
 @shared_task
 def generate_chat_advice_task(profile_id):
     from .models import Profile
     profile = Profile.objects.get(pk=profile_id)
-    if created or not instance.get_chat_advice():
-            if instance.is_complete():
+    if not profile.get_chat_advice():
+            if profile.is_complete():
                     client = OpenAI(
-                        api_key="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",
+                        api_key="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",
                     )
-                    conversation = f"User Profile:\nHeight: {instance.height} cm.\nWeight: {instance.weight} kg.\nAge: {instance.age} years old.\nGender: {instance.get_gender_display()}\nActivity Level: {instance.get_activity_level_display()}\nWeight Goal: {instance.get_weight_goal_display()}"
+                    conversation = f"User Profile:\nHeight: {profile.height} cm.\nWeight: {profile.weight} kg.\nAge: {profile.age} years old.\nGender: {profile.get_gender_display()}\nActivity Level: {profile.get_activity_level_display()}\nWeight Goal: {profile.get_weight_goal_display()}"
                     messages = [
                         {
                             "role": "system",
@@ -25,4 +26,4 @@ def generate_chat_advice_task(profile_id):
                         messages=messages
                     )
                     chat_response = response.choices[0].message.content.strip()
-                    instance.set_chat_advice(chat_response)
+                    profile.set_chat_advice(chat_response)
