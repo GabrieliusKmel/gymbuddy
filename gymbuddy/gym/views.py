@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from user_profile.models import Profile
+from django.views import View
 
 @login_required
 def homepage(request):
@@ -10,3 +11,9 @@ def homepage(request):
         return redirect('profile_update')
     return render(request, 'gym/index.html')
 
+class ChatAdvice(View):
+    template_name = 'gym/chat_advice.html'
+    def get(self, request, *args, **kwargs):
+        user_profile = Profile.objects.get(user=request.user)
+        chat_advice = user_profile.get_chat_advice()
+        return render(request, self.template_name, {'chat_advice': chat_advice})

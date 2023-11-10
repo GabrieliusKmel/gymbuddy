@@ -5,35 +5,28 @@ from django.contrib import messages
 from django.http import HttpRequest
 from . import models, forms
 from django.utils.translation import gettext_lazy as _
+from django.http import JsonResponse
 
 User = get_user_model()
 
 @csrf_protect
 def profile_update(request: HttpRequest):
     if request.method == "POST":
-        user_form = forms.UserUpdateForm(request.POST, instance=request.user)
         profile_form = forms.ProfileUpdateForm(request.POST, instance=request.user.profile)
-
-        if user_form.is_valid() and profile_form.is_valid():
-            user_form.save()
+        if profile_form.is_valid():
             profile_form.save()
             messages.success(request, _('Your user profile changes have been saved.'))
-            return redirect('profile')
+            return redirect('profile_update')
         else:
             messages.error(request, _('Please make sure to fill in all the required fields.'))
     else:
-        user_form = forms.UserUpdateForm(instance=request.user)
         profile_form = forms.ProfileUpdateForm(instance=request.user.profile)
-
     return render(request, 'user_profile/update.html', {
-        'user_form': user_form,
         'profile_form': profile_form,
     })
 
-
 def profile(request: HttpRequest):
     return render(request, "user_profile/profile.html")
-
 
 @csrf_protect
 def signup(request: HttpRequest):

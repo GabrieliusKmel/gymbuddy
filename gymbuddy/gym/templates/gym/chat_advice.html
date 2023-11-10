@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load i18n static %}
+{% block title %}{% trans "Advice"|capfirst %} {{block.super}}{% endblock title %}
+{% block content %}
+<head>
+    <title>Chat Advice</title>
+    <style>
+        #chat-response-container {
+            white-space: pre-line;
+            font-family: 'Your Font Name', sans-serif; /* Replace 'Your Font Name' with your desired font */
+            max-width: 100%; /* Adjust the maximum width as needed */
+            overflow: auto; /* Add scrolling if the content exceeds the width */
+            padding: 10px; /* Add padding for better readability */
+        }
+    </style>
+</head>
+<body>
+    <h1>ChatGPT Advice</h1>
+    <div id="chat-response-container">
+        {% if chat_advice %}
+            <pre>{{ chat_advice|safe }}</pre>
+        {% else %}
+            <p>No advice available</p>
+        {% endif %}
+    </div>
+</body>
+{% endblock content %}

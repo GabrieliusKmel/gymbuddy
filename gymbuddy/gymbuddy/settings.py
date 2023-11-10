@@ -34,6 +34,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'gym',
     'user_profile',
+    'tinymce',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -141,3 +142,18 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = local_settings.EMAIL_HOST_USER
 EMAIL_HOST_PASSWORD = local_settings.EMAIL_HOST_PASSWORD
+
+TINYMCE_DEFAULT_CONFIG = {
+    'height': 300,
+    'cleanup_on_startup': False,
+    'custom_undo_redo_levels': 20,
+    'selector': 'textarea',
+    'plugins': 'contextmenu textcolor lists directionality visualchars charmap media image advlist autolink code',
+    'toolbar1': '''
+            code removeformat | formatselect bold italic underline forecolor backcolor | 
+            alignleft alignright aligncenter alignjustify | indent outdent bullist numlist |
+            visualblocks visualchars | charmap | image media
+            ''',
+    'statusbar': True,
+    'menubar': False,
+}

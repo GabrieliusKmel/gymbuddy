@@ -8,8 +8,8 @@
     {% csrf_token %}
     {{ form.as_p }}
     <p><button type="submit">{% trans "Log in"|capfirst %}</button></p>
+    <p><a href="{% url "password_reset" %}">{% trans "Forgot password"|capfirst %}?</a></p>
+    <p>{% trans "Don't have an account"|capfirst %}?<a href="{% url 'signup' %}">{% trans "Sign up"|capfirst %}</a>!</p>
   </form>
-  <p><a href="{% url "password_reset" %}">{% trans "Forgot password"|capfirst %}?</a></p>
-  <p>{% trans "Don't have an account"|capfirst %}?<a href="{% url 'signup' %}">{% trans "Sign up"|capfirst %}</a>!</p>
 </div>
 {% endblock content %}
