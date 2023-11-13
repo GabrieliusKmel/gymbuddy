@@ -2,4 +2,19 @@
 {% load i18n static %}
 {% block title %}{% trans "Home"|capfirst %} {{block.super}}{% endblock title %}
 {% block content %}
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        .background-container {
+            background-image: url('{% static "img/bg.jpg" %}');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+        }
+    </style>
+    <div class="background-container">
+    </div>
 {% endblock content %}

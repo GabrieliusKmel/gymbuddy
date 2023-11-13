@@ -2,11 +2,11 @@
 {% load i18n %}
 {% block title %}{% trans "Setup at"|title %} {{ block.super }}{% endblock title %}
 {% block content %}
-<h1>{% trans "Setup"|capfirst %}</h1>
+<h1>{% trans "Profile setup for generating GymBuddy"|capfirst %}</h1>
 <form method="post" action="{{ request.path }}" enctype="multipart/form-data">
     {% csrf_token %}
     {{ user_form.as_p }}
     {{ profile_form.as_p }}
-    <p><button type="submit">{% trans "save changes"|capfirst %}</button></p>
+    <p><button type="submit">{% trans "Generate"|capfirst %}</button></p>
 </form>
 {% endblock content %}
