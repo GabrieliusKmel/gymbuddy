@@ -5,7 +5,8 @@ from django.utils.translation import gettext as _
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from .tasks import generate_chat_advice_task
-from django.utils import timezone 
+from django.utils import timezone
+from datetime import timedelta
 
 
 class Profile(models.Model):
@@ -38,6 +39,8 @@ class Profile(models.Model):
 
     chat_advice = models.TextField(_("ChatGPT advice"), null=True, blank=True)
     chat_advice_time = models.DateTimeField(_("Chat advice time"), null=True, blank=True)
+    time_left = models.DurationField(_("Time left until next advice generation"), null=True, blank=True)
+
 
     class Meta:
         verbose_name = _("profile")
@@ -70,8 +73,20 @@ class Profile(models.Model):
         self.chat_advice_time = time
         self.save()
     
+    def set_time_left(self, time_left):
+        if not hasattr(self, '_setting_time_left'):
+            self._setting_time_left = True
+            self.time_left = time_left
+            self.save()
+            delattr(self, '_setting_time_left')
+    
 @receiver(post_save, sender=Profile)
 def generate_chat_advice(sender, instance, created, **kwargs):
     if created or not instance.get_chat_advice():
         if instance.is_complete():
             generate_chat_advice_task.delay(instance.pk)
+    else:
+        time_since_last_generation = timezone.now() - instance.chat_advice_time
+        time_left = timedelta(hours=24) - time_since_last_generation
+        if not hasattr(instance, '_setting_time_left'):
+            instance.set_time_left(time_left)

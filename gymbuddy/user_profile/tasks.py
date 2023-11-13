@@ -1,6 +1,8 @@
 from celery import shared_task
 from openai import OpenAI
 from django.utils import timezone
+from datetime import timedelta
+
 
 @shared_task
 def generate_chat_advice_task(profile_id):
@@ -30,5 +32,3 @@ def generate_chat_advice_task(profile_id):
                 profile.set_chat_advice(chat_response)
                 time_now = timezone.now()
                 profile.set_chat_advice_time(time_now)
-    else:
-        print("bbz")
