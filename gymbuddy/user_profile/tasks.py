@@ -1,5 +1,6 @@
 from celery import shared_task
 from openai import OpenAI
+from django.utils import timezone
 
 @shared_task
 def generate_chat_advice_task(profile_id):
@@ -8,7 +9,7 @@ def generate_chat_advice_task(profile_id):
     if not profile.get_chat_advice():
             if profile.is_complete():
                     client = OpenAI(
-                        api_key="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",
+                        api_key="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",
                     )
                     conversation = f"User Profile:\nHeight: {profile.height} cm.\nWeight: {profile.weight} kg.\nAge: {profile.age} years old.\nGender: {profile.get_gender_display()}\nActivity Level: {profile.get_activity_level_display()}\nWeight Goal: {profile.get_weight_goal_display()}"
                     messages = [
@@ -27,3 +28,5 @@ def generate_chat_advice_task(profile_id):
                     )
                     chat_response = response.choices[0].message.content.strip()
                     profile.set_chat_advice(chat_response)
+                    time_now = timezone.now()
+                    profile.set_chat_advice_time(time_now)

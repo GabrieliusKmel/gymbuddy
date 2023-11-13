@@ -66,6 +66,10 @@ class Profile(models.Model):
     def get_chat_advice(self):
         return self.chat_advice
     
+    def set_chat_advice_time(self, time):
+        self.chat_advice_time = time
+        self.save()
+    
 @receiver(post_save, sender=Profile)
 def generate_chat_advice(sender, instance, created, **kwargs):
     if created or not instance.get_chat_advice():
