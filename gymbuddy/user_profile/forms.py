@@ -1,10 +1,8 @@
 from django import forms
 from django.contrib.auth import get_user_model
 from . import models
-from django.contrib import messages 
 
 User = get_user_model()
-
 
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
@@ -33,5 +31,4 @@ class ProfileUpdateForm(forms.ModelForm):
             del cleaned_data['age']
             del cleaned_data['activity_level']
             del cleaned_data['weight_goal']
-
         return cleaned_data

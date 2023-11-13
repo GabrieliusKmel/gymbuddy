@@ -2,26 +2,16 @@
 {% load i18n static %}
 {% block title %}{% trans "Advice"|capfirst %} {{block.super}}{% endblock title %}
 {% block content %}
-<head>
-    <title>Chat Advice</title>
-    <style>
-        #chat-response-container {
-            white-space: pre-line;
-            font-family: 'Your Font Name', sans-serif; /* Replace 'Your Font Name' with your desired font */
-            max-width: 100%; /* Adjust the maximum width as needed */
-            overflow: auto; /* Add scrolling if the content exceeds the width */
-            padding: 10px; /* Add padding for better readability */
-        }
-    </style>
-</head>
-<body>
-    <h1>ChatGPT Advice</h1>
-    <div id="chat-response-container">
-        {% if chat_advice %}
-            <pre>{{ chat_advice|safe }}</pre>
-        {% else %}
-            <p>No advice available</p>
-        {% endif %}
-    </div>
-</body>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/htmx/1.9.8/htmx.min.js" integrity="sha512-wua2xfJY3quQbT5pSx40Tp5+LD/zpw/9hARj1zsjJOA+rCq7N7pf7wlBXXdn5iGjQI5HE7svGvPz529Q3gJDiA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    </head>
+    <body class="bg-danger">
+        <div id="chat" hx-get="/chat/" hx-trigger="every 5s" hx-swap="innerHTML">
+            {% include 'gym/chat.html' %}
+        </div>
+    </body>
+</html>
 {% endblock content %}

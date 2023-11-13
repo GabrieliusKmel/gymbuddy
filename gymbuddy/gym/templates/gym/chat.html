@@ -1,0 +1,8 @@
+<div id="chat-response-container">
+    {% if chat_advice %}
+        <p>{{ chat_advice|safe|linebreaks }}</p>
+        <a href="{% url 'pdf' %}" class="btn btn-primary">Download PDF</a>
+    {% else %}
+        <p>GymBuddy is generating the advice for you. Please wait..</p>
+    {% endif %}
+</div>

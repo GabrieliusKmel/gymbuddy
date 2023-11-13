@@ -2,10 +2,12 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import get_user_model
 from django.views.decorators.csrf import csrf_protect
 from django.contrib import messages
-from django.http import HttpRequest
+from django.http import HttpRequest, HttpResponse
 from . import models, forms
 from django.utils.translation import gettext_lazy as _
-from django.http import JsonResponse
+from django.template.loader import get_template
+from django.views import View
+from weasyprint import HTML
 
 User = get_user_model()
 
@@ -46,13 +48,26 @@ def signup(request: HttpRequest):
             for error in errors:
                 messages.error(request, error)
         else:
-            # Create the user
             user = User.objects.create_user(username=username, email=email, password=password1)
-            
-            # Create a Profile for the user
             profile = models.Profile(user=user)
             profile.save()
-
             messages.success(request, _("Sign up successful. You can log in now."))
             return redirect('login')
     return render(request, 'user_profile/signup.html')
+
+class GeneratePDF(View):
+    template_name = 'user_profile/pdf.html'
+
+    def get_context_data(self):
+        user_profile = models.Profile.objects.get(user=self.request.user)
+        chat_advice = user_profile.get_chat_advice()
+        return {'chat_advice': chat_advice}
+
+    def get(self, request, *args, **kwargs):
+        template = get_template(self.template_name)
+        context = self.get_context_data()
+        html = template.render(context)
+        pdf_file = HTML(string=html).write_pdf()
+        response = HttpResponse(pdf_file, content_type='application/pdf')
+        response['Content-Disposition'] = 'attachment; filename="gymbuddy.pdf"'
+        return response

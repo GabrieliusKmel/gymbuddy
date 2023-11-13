@@ -4,10 +4,8 @@ from django.urls import reverse
 from django.utils.translation import gettext as _
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from openai import OpenAI
-from tinymce.models import HTMLField
-from celery import shared_task
 from .tasks import generate_chat_advice_task
+from django.utils import timezone 
 
 
 class Profile(models.Model):
@@ -39,6 +37,7 @@ class Profile(models.Model):
     ), default="gain_weight")
 
     chat_advice = models.TextField(_("ChatGPT advice"), null=True, blank=True)
+    chat_advice_time = models.DateTimeField(_("Chat advice time"), null=True, blank=True)
 
     class Meta:
         verbose_name = _("profile")
