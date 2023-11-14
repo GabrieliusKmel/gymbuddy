@@ -99,3 +99,20 @@ body {
     height: auto;
     margin-bottom: 20px;
 }
+.form-login ul:first-of-type {
+  display: none;
+}
+
+.errorlist {
+  color: #ff0000;
+  margin-bottom: 10px;
+  padding: 0;
+  margin: 0;
+}
+
+.errorlist li {
+  list-style-type: none;
+}
+#id_new_password1 {
+  margin: 0;
+}

@@ -1,9 +1,13 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% load static %}
-{% block title %}{% trans "logged out from"|title %} {{ block.super }}{% endblock title %}
+{% block title %}{% trans "Logged out from"|capfirst %} {{ block.super }}{% endblock title %}
 {% block content %}
-<h1>{% trans "bye bye"|capfirst %}</h1>
-<p>{% trans "you are now logged out"|capfirst %}. 
+<div class="login-container">
+    <form class='form-login'>
+    <h1>{% trans "Till the next time!"|capfirst %}</h1>
+    <p>{% trans "you are now logged out"|capfirst %}. 
     {% trans "you are welcome to"|capfirst %} <a href="{% url "login" %}">{% trans "login" %}</a> {% trans "back any time" %}.</p>
+    </form>
+</div>
 {% endblock content %}
