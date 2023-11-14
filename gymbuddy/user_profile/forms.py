@@ -7,11 +7,11 @@ User = get_user_model()
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = models.Profile
-        fields = ['height', 'weight', 'gender', 'age', 'activity_level', 'weight_goal']
+        fields = ['height', 'weight', 'age', 'gender', 'activity_level', 'weight_goal']
         widgets = {
-            'gender': forms.RadioSelect,
-            'activity_level': forms.RadioSelect,
-            'weight_goal': forms.RadioSelect,
+            'gender': forms.Select,
+            'activity_level': forms.Select,
+            'weight_goal': forms.Select,
         }
 
     def clean(self):
