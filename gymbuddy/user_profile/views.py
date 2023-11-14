@@ -8,6 +8,7 @@ from django.utils.translation import gettext_lazy as _
 from django.template.loader import get_template
 from django.views import View
 from weasyprint import HTML
+from django.utils import timezone
 
 User = get_user_model()
 
@@ -17,8 +18,20 @@ def profile_update(request: HttpRequest):
         profile_form = forms.ProfileUpdateForm(request.POST, instance=request.user.profile)
         if profile_form.is_valid():
             profile_form.save()
-            messages.success(request, _('Your user profile changes have been saved.'))
-            return redirect('profile_update')
+            user_profile = request.user.profile
+            if not user_profile.chat_advice:
+                messages.success(request, _('Your first GymBuddy is generating! Please wait..'))
+                return redirect('profile_update')
+            else:
+                time_now = timezone.now()
+                time_left = user_profile.time_left - time_now
+                time_left_formatted = f"{time_left.days} days, {time_left.seconds // 3600} hours, {(time_left.seconds // 60) % 60} minutes"
+                if user_profile.time_left < time_now:
+                    messages.success(request, _('Your GymBuddy is generating! Please wait..'))
+                    return redirect('profile_update')
+                else:
+                    messages.error(request, _(f'Time left: {time_left_formatted}'))
+                    return redirect('profile_update')
         else:
             messages.error(request, _('Please make sure to fill in all the required fields.'))
     else:

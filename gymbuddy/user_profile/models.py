@@ -39,7 +39,7 @@ class Profile(models.Model):
 
     chat_advice = models.TextField(_("ChatGPT advice"), null=True, blank=True)
     chat_advice_time = models.DateTimeField(_("Chat advice time"), null=True, blank=True)
-    time_left = models.DurationField(_("Time left until next advice generation"), null=True, blank=True)
+    time_left = models.DateTimeField(_("Timeleft till regenerating"), null=True, blank=True)
 
 
     class Meta:
@@ -74,11 +74,8 @@ class Profile(models.Model):
         self.save()
     
     def set_time_left(self, time_left):
-        if not hasattr(self, '_setting_time_left'):
-            self._setting_time_left = True
-            self.time_left = time_left
-            self.save()
-            delattr(self, '_setting_time_left')
+       self.time_left = time_left
+       self.save()
     
 @receiver(post_save, sender=Profile)
 def generate_chat_advice(sender, instance, created, **kwargs):
@@ -86,7 +83,4 @@ def generate_chat_advice(sender, instance, created, **kwargs):
         if instance.is_complete():
             generate_chat_advice_task.delay(instance.pk)
     else:
-        time_since_last_generation = timezone.now() - instance.chat_advice_time
-        time_left = timedelta(hours=24) - time_since_last_generation
-        if not hasattr(instance, '_setting_time_left'):
-            instance.set_time_left(time_left)
+        generate_chat_advice_task.delay(instance.pk)
