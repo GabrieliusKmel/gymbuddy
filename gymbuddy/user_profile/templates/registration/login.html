@@ -6,10 +6,11 @@
 <div class="login-container">
   <form method="post" action="{% url "login" %}" class='form-login'>
     {% csrf_token %}
+    <h1>{% trans "Login"|capfirst %}</h1>
     {{ form.as_p }}
     <p><button type="submit">{% trans "Log in"|capfirst %}</button></p>
     <p><a href="{% url "password_reset" %}">{% trans "Forgot password"|capfirst %}?</a></p>
-    <p>{% trans "Don't have an account"|capfirst %}?<a href="{% url 'signup' %}">{% trans "Sign up"|capfirst %}</a>!</p>
+    <p>{% trans "Don't have an account"|capfirst %}? <a href="{% url 'signup' %}">{% trans "Sign up"|capfirst %}</a>!</p>
   </form>
 </div>
 {% endblock content %}

@@ -16,39 +16,27 @@
     </style>
 </head>
 <body>
-    <header>
-        <ul class="nav">
-        {% if user.is_authenticated %}
-            {% if user.profile.is_complete %}
-                    <li class="logo">
-                        <a href="{% url "index" %}">
-                            <img src="{% static 'img/icon.svg' %}" alt="Logo Image">
-                        </a>
-                    </li>
-                    <li><a href="{% url "index" %}">{% trans "home"|title %}</a></li>
-                    <li><a href="{% url "chatadvice" %}">{% trans "advice"|title %}</a></li>
-                    <li class="spacer"></li>
-                    {% if user.is_superuser or user.is_staff %}
-                    <li><a href="{% url "admin:index" %}">{% trans "admin"|title %}</a></li>
-                    {% endif %}
-                    <li><a href="{% url "profile_update" %}">{% trans "Setup"|title %}</a></li>
-                    <li><a href="{% url "logout" %}">{% trans "logout"|title %}</a></li>
-            {% endif %}
-        {% endif %}
-        <li>
-            <form class="inline-form" action="{% url "set_language" %}" method="post">
-                {% csrf_token %}
-                <select name="language" onchange="this.form.submit();">
-                    {% for language_code, language_name in LANGUAGES %}
-                    <option value="{{ language_code }}" {% if language_code == LANGUAGE_CODE %}selected{% endif %}>
-                        {{ language_name }}
-                    </option>
-                    {% endfor %}
-                </select>
-            </form>
-        </li>
-        </ul>
-    </header>    
+    {% if user.is_authenticated %}
+        <header>
+            <ul class="nav">
+                {% if user.profile.is_complete %}
+                        <li class="logo">
+                            <a href="{% url "index" %}">
+                                <img src="{% static 'img/icon.svg' %}" alt="Logo Image">
+                            </a>
+                        </li>
+                        <li><a href="{% url "index" %}">{% trans "home"|title %}</a></li>
+                        <li><a href="{% url "chatadvice" %}">{% trans "advice"|title %}</a></li>
+                        <li class="spacer"></li>
+                        {% if user.is_superuser or user.is_staff %}
+                        <li><a href="{% url "admin:index" %}">{% trans "admin"|title %}</a></li>
+                        {% endif %}
+                        <li><a href="{% url "profile_update" %}">{% trans "Setup"|title %}</a></li>
+                        <li><a href="{% url "logout" %}">{% trans "logout"|title %}</a></li>
+                {% endif %}
+            </ul>
+        </header>
+    {% endif %}    
     <main>
         {% if messages %}
         {% for message in messages %}
@@ -60,8 +48,10 @@
         {% block content %}
         {% endblock content %}
     </main>
-    <footer>
-        <p>&copy;<a href="{% url "index" %}">{% trans "GymBuddy" %}</a></p>
-    </footer>
+    {% if user.is_authenticated %}
+        <footer>
+            <p>&copy;<a href="{% url "index" %}">{% trans "GymBuddy" %}</a></p>
+        </footer>
+    {% endif %}
 </body>
 </html>
