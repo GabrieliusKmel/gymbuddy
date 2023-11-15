@@ -25,12 +25,12 @@ def profile_update(request: HttpRequest):
             else:
                 time_now = timezone.now()
                 time_left = user_profile.time_left - time_now
-                time_left_formatted = f"{time_left.days} days, {time_left.seconds // 3600} hours, {(time_left.seconds // 60) % 60} minutes"
+                time_left_formatted = f"{time_left.seconds // 3600} hours and {(time_left.seconds // 60) % 60} minutes"
                 if user_profile.time_left < time_now:
                     messages.success(request, _('Your GymBuddy is generating! Please wait..'))
                     return redirect('profile_update')
                 else:
-                    messages.error(request, _(f'Time left: {time_left_formatted}'))
+                    messages.error(request, _(f'You can generate GymBuddy again in {time_left_formatted}'))
                     return redirect('profile_update')
         else:
             messages.error(request, _('Please make sure to fill in all the required fields.'))
