@@ -3,6 +3,7 @@ body {
   padding: 0;
   font-family: Arial, sans-serif;
   background-color: #212738;
+  min-height: 100vh;
 }
 
 .login-container {
@@ -119,44 +120,46 @@ body {
 main {
     flex-grow: 1;
 }
-header {
-    padding: 1rem;
-    margin:  0;
-}
 .logo img{
     width: 30px;
     height: 30px;
 }
 header {
-    background-color: rgb(0, 0, 0);
-    color: #afafaf;
+  background-color: rgb(0, 0, 0);
+  color: #afafaf;
+  padding: 1rem;
+  margin: 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
+
 header a {
-    color: #d8d8d8;
-    text-decoration: none;
+  color: #d8d8d8;
+  text-decoration: none;
 }
+
 header a:hover {
-    color: #a3a3a3;
+  color: #a3a3a3;
 }
-header ul.nav{
-    display: flex;
-    flex-direction: row;
-    list-style-type: none;
-    padding-inline-start: 0;
-    padding: 0;
-    margin: 0;
-    text-align: center;
-    align-items: center;
+
+header ul.nav {
+  display: flex;
+  flex-direction: row;
+  list-style-type: none;
+  padding-inline-start: 0;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  align-items: center;
 }
+
 ul.nav li {
-    margin: 0 0.5rem;
-    padding: 0.5rem;
+  margin: 0 0.5rem;
+  padding: 0.5rem;
 }
 .num {
     color: #ff0000;
-}
-li.spacer {
-    flex-grow: 1;
 }
 .box {
     background-color: #f2f2f2;
@@ -181,24 +184,30 @@ ul.nav {
     margin: 10px 0;
 }
 footer {
-    background-color: rgb(0, 0, 0);
-    color: #fff;
-    text-align: center;
-    margin: 0;
-    padding: 8px;
+  background-color: rgb(0, 0, 0);
+  color: #fff;
+  text-align: center;
+  padding: 8px;
+  margin-top: auto;
+  position: sticky;
+  bottom: 0;
+  padding: 1rem;
 }
+
 footer a {
-    text-decoration: none;
+  text-decoration: none;
 }
+
 footer a:visited {
-    color: inherit;
-    text-decoration: none;
+  color: inherit;
+  text-decoration: none;
 }
+
 footer a:hover {
-    color: #a3a3a3;
+  color: #a3a3a3;
 }
 .gradient {
-	width: 100vw;
+	width: auto;
 	height: 100vh;
 	background: linear-gradient(334deg, #6b97f7, #7525e2, #f7137e);
 	background-size: 180% 180%;
@@ -251,7 +260,6 @@ footer a:hover {
 }
 
 .form-login1 a {
-  color: #462255;
   text-decoration: none;
 }
 
@@ -304,4 +312,71 @@ footer a:hover {
   transform:translate(-50%,-50%) skewX(0deg);
   left:0;
   color:#fff;
+}
+.login-container2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100vh;
+}
+.form-login2 {
+  background: #EDF2EF;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 430px;
+  width: 100%;
+}
+.form svg {
+  text-align: center;
+}
+.form-login2 p {
+  margin-bottom: 0;
+}
+.custom-button {
+  background-color: #462255;
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  display: flex;
+}
+.custom-button:hover {
+  text-decoration: none!important;
+}
+@media only screen and (max-width: 600px) {
+  header {
+    position: static; /* or position: relative; */
+  }
+
+  footer {
+    position: static; /* or position: relative; */
+  }
+
+  header ul.nav {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  header ul.nav li {
+    margin: 0.5rem 0;
+  }
+
+  header .spacer {
+    display: none;
+  }
+
+  .center h1 span {
+    display: none;
+  }
+
+  .center h1 span:nth-child(2) {
+    left: -20px;
+  }
+
+  .center h1 span:nth-child(3) {
+    left: -40px;
+  }
 }

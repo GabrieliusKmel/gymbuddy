@@ -1,14 +1,15 @@
+{% load custom_filters %}
 <div id="chat-response-container">
     {% if chat_advice %}
         <div class="login-container1">
             <form class='form-login1'>
-                <p>{{ chat_advice|safe|linebreaks }}</p>
-                <a href="{% url 'pdf' %}" class="btn btn-primary">Download PDF</a>
+                <p>{{ chat_advice|safe|linebreaks|bold_specific_words }}</p>
+                <a href="{% url 'pdf' %}" class="custom-button">Download GymBuddy advice in PDF</a>
             </form>
         </div>
     {% else %}
-        <div class="login-container">
-            <form class='form-login'>
+        <div class="login-container2">
+            <form class='form-login2'>
                 <svg width="48" height="48" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <style>.spinner_d9Sa{transform-origin:center}.spinner_qQQY{animation:spinner_ZpfF 9s linear infinite}.spinner_pote{animation:spinner_ZpfF .75s linear infinite}@keyframes spinner_ZpfF{100%{transform:rotate(360deg)}}</style>
                     <path d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,20a9,9,0,1,1,9-9A9,9,0,0,1,12,21Z"/>
