@@ -6,7 +6,7 @@ register = template.Library()
 @register.filter
 def bold_specific_words(value):
     # List of specific words to make bold
-    bold_words = ['Meal Plan:', 'Workout Plan:', 'Note:', "Rest Plan:"]
+    bold_words = ['Meal Plan:', 'Workout Plan:', 'Note:', "Rest Plan:" ,"Plan:"]
 
     # Wrap each bold word with <strong> HTML tag
     for word in bold_words:

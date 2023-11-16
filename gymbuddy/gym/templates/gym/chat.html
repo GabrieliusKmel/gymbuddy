@@ -4,7 +4,7 @@
         <div class="login-container1">
             <form class='form-login1'>
                 <p>{{ chat_advice|safe|linebreaks|bold_specific_words }}</p>
-                <a href="{% url 'pdf' %}" class="custom-button">Download GymBuddy advice in PDF</a>
+                <span><a href="{% url 'pdf' %}" class="custom-button">Download GymBuddy advice in PDF</a></span>
             </form>
         </div>
     {% else %}

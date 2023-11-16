@@ -21,6 +21,15 @@ body {
   max-width: 400px;
   width: 100%;
 }
+.form-login p label {
+  display: inline-block;
+  min-width: 100px;
+}
+.form-login p select {
+  display: inline-block;
+  min-width: 130px;
+  text-align: center;
+}
 
 .form-login input {
   width: 100%;
@@ -233,7 +242,10 @@ footer a:hover {
   height: auto;
   overflow: auto;
 }
-
+.login-container1 span {
+  display: flex;
+  justify-content: center;
+}
 .form-login1 {
   background: #EDF2EF;
   padding: 20px;
@@ -260,7 +272,14 @@ footer a:hover {
 }
 
 .form-login1 a {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 10px 0;
+  background-color: #462255;
+  color: #fff;
   text-decoration: none;
+  border-radius: 3px;
 }
 
 .form-login1 a:hover {
@@ -279,6 +298,9 @@ footer a:hover {
   transform:prespective(1000px) translate(-50%,-50%);
   transform:skewY(0deg);
 }
+.mobileindex {
+  display: none;
+}
 
 .center h1 span{
   position:absolute;
@@ -288,7 +310,7 @@ footer a:hover {
   margin:0;
   padding:0;
   text-transform:uppercase;
-  font-size:7em;
+  font-size:9vw;
   color:#fff;
   transform-style:preserve-3d;
   transition:0.8s;
@@ -378,5 +400,11 @@ footer a:hover {
 
   .center h1 span:nth-child(3) {
     left: -40px;
+  }
+  .mobileindex {
+    display: inline-block;
+  }
+  .logo {
+    display: none;
   }
 }

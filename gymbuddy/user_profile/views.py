@@ -9,9 +9,11 @@ from django.template.loader import get_template
 from django.views import View
 from weasyprint import HTML
 from django.utils import timezone
+from django.contrib.auth.decorators import login_required
 
 User = get_user_model()
 
+@login_required
 @csrf_protect
 def profile_update(request: HttpRequest):
     if request.method == "POST":

@@ -1,24 +1,15 @@
 <!DOCTYPE html>
+{% load custom_filters %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GymBuddy</title>
     <style>
-        @page {
-            margin: 0;
-        }
-        body {
-            background-color: #808080; /* Grey background color */
-            margin: 0;
-        }
-        body p {
-            padding-top: 1rem;
-        }
     </style>
 </head>
 <body>
     <h2>GymBuddy Advice</h2>
-    <p>{{ chat_advice|safe|linebreaks }}</p>
+    <p>{{ chat_advice|safe|linebreaks|bold_specific_words }}</p>
 </body>
 </html>
