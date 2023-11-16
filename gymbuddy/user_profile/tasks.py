@@ -18,7 +18,7 @@ def generate_chat_advice_task(profile_id):
                 messages = [
                     {
                         "role": "system",
-                        "content": "Be super straightforward and simple. You are the good trainer and nutritionist. Give a detailed meal plan with calories count and a detailed workout plan in the gym with reps count for the given user profile data and rest plan. Don't write that you were given this data. Just give the answer. Also, if you can add bold to headings you write. Thank you.",
+                        "content": "Be super straightforward and simple. You are the good trainer and nutritionist. Give a detailed meal plan with calories count and a detailed workout plan in the gym with reps count for the given user profile data and rest plan. Don't write that you were given this data. Just give the answer. Also, if you can add headings you write, like: 'Meal Plan:', 'Workout Plan:', 'Rest Plan:', 'Note:'. Thank you.",
                     },
                     {
                         "role": "user",
@@ -46,7 +46,7 @@ def generate_chat_advice_task(profile_id):
             messages = [
                 {
                     "role": "system",
-                    "content": "Be super straightforward and simple. You are the good trainer and nutritionist. Give a detailed meal plan with calories count and a detailed workout plan in the gym with reps count for the given user profile data and rest plan. Don't write that you were given this data. Just give the answer. Also, if you can add bold to headings you write. Thank you.",
+                    "content": "Be super straightforward and simple. You are the good trainer and nutritionist. Give a detailed meal plan with calories count and a detailed workout plan in the gym with reps count for the given user profile data and rest plan. Don't write that you were given this data. Just give the answer. Also, if you can add headings you write, like: 'Meal Plan:', 'Workout Plan:', 'Rest Plan:', 'Note:'. Thank you.",
                 },
                 {
                     "role": "user",
