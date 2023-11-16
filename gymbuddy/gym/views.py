@@ -11,6 +11,7 @@ def homepage(request):
         return redirect('profile_update')
     return render(request, 'gym/index.html')
 
+@login_required
 class ChatAdvice(View):
     template_name = 'gym/chat_advice.html'
     def get(self, request, *args, **kwargs):

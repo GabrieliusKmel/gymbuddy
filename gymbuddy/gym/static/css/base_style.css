@@ -27,7 +27,7 @@ body {
 }
 .form-login p select {
   display: inline-block;
-  min-width: 130px;
+  min-width: 295px;
   text-align: center;
 }
 
@@ -167,6 +167,9 @@ ul.nav li {
   margin: 0 0.5rem;
   padding: 0.5rem;
 }
+.centered {
+    margin: 0 auto; /* Move the "Home" and "Advice" to the center */
+}
 .num {
     color: #ff0000;
 }
@@ -300,6 +303,31 @@ footer a:hover {
 }
 .mobileindex {
   display: none;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+  color: #212738;
+}
+
+.mobileindex h3 {
+  margin: 0;
+  padding: 2rem;
+  font-size: 11vw;
+  background-size: 100% 100%;
+  background-color: rgba(255, 255, 255, 0.4);
+  width: 100%;
+}
+
+.mobile-link {
+  text-decoration: none; /* Remove underline from the link */
+  color: inherit;
+  width: 100%; /* Inherit text color from the parent */
+}
+
+.mobileindex h3:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+  color: #000000;
 }
 
 .center h1 span{
@@ -368,6 +396,9 @@ footer a:hover {
 .custom-button:hover {
   text-decoration: none!important;
 }
+.spacer {
+  flex-grow: 1;
+}
 @media only screen and (max-width: 600px) {
   header {
     position: static; /* or position: relative; */
@@ -402,7 +433,7 @@ footer a:hover {
     left: -40px;
   }
   .mobileindex {
-    display: inline-block;
+    display: flex;
   }
   .logo {
     display: none;

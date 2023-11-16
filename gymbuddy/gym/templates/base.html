@@ -9,6 +9,7 @@
     <title>{% block title %}GymBuddy{% endblock title %}</title>
     <link rel="stylesheet" href="{% static "css/base_style.css" %}">
     <link rel="icon" href="{% static 'img/icon.svg' %}" type="image/svg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> <!-- Include Font Awesome stylesheet -->
     <style>
         .logo a:hover img {
             content: url("{% static 'img/icon3.svg' %}");
@@ -20,19 +21,19 @@
         <header>
             <ul class="nav">
                 {% if user.profile.is_complete %}
-                        <li class="logo">
-                            <a href="{% url "index" %}">
-                                <img src="{% static 'img/icon.svg' %}" alt="Logo Image">
-                            </a>
-                        </li>
-                        <li><a href="{% url "index" %}">{% trans "home"|title %}</a></li>
-                        <li><a href="{% url "chatadvice" %}">{% trans "advice"|title %}</a></li>
-                        <li class="spacer"></li>
-                        {% if user.is_superuser or user.is_staff %}
+                    <li class="logo">
+                        <a href="{% url "index" %}">
+                            <img src="{% static 'img/icon.svg' %}" alt="Logo Image">
+                        </a>
+                    </li>
+                    <li><a href="{% url "index" %}">{% trans "home"|title %}</a></li>
+                    <li><a href="{% url "chatadvice" %}">{% trans "advice"|title %}</a></li>
+                    <li class="spacer"></li>
+                    {% if user.is_superuser or user.is_staff %}
                         <li><a href="{% url "admin:index" %}">{% trans "admin"|title %}</a></li>
-                        {% endif %}
-                        <li><a href="{% url "profile_update" %}">{% trans "Setup"|title %}</a></li>
-                        <li><a href="{% url "logout" %}">{% trans "logout"|title %}</a></li>
+                    {% endif %}
+                    <li><a href="{% url "profile_update" %}">{% trans "Setup"|title %}</a></li>
+                    <li><a href="{% url "logout" %}">{% trans "logout"|title %} <i class="fas fa-sign-out-alt"></i></a></li>
                 {% endif %}
             </ul>
         </header>
