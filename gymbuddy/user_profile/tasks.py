@@ -11,7 +11,7 @@ def generate_chat_advice_task(profile_id):
     if not profile.get_chat_advice():
         if profile.is_complete():
                 client = OpenAI(
-                    api_key="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",
+                    api_key="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",
                 )
                 conversation = f"User Profile:\nHeight: {profile.height} cm.\nWeight: {profile.weight} kg.\nAge: {profile.age} years old.\nGender: {profile.get_gender_display()}\nActivity Level: {profile.get_activity_level_display()}\nWeight Goal: {profile.get_weight_goal_display()}"
                 messages = [
@@ -39,7 +39,7 @@ def generate_chat_advice_task(profile_id):
         print(profile.time_left, time_now)
         if profile.time_left < time_now:
             client = OpenAI(
-                api_key="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",
+                api_key="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",
             )
             conversation = f"User Profile:\nHeight: {profile.height} cm.\nWeight: {profile.weight} kg.\nAge: {profile.age} years old.\nGender: {profile.get_gender_display()}\nActivity Level: {profile.get_activity_level_display()}\nWeight Goal: {profile.get_weight_goal_display()}"
             messages = [

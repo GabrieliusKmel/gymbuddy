@@ -21,19 +21,19 @@
         {% if user.profile.is_complete %}
             <header>
                 <ul class="nav">
-                        <li class="logo">
-                            <a href="{% url "index" %}">
-                                <img src="{% static 'img/icon.svg' %}" alt="Logo Image">
-                            </a>
-                        </li>
-                        <li><a href="{% url "index" %}">{% trans "home"|title %}</a></li>
-                        <li><a href="{% url "chatadvice" %}">{% trans "advice"|title %}</a></li>
-                        <li><a href="{% url "about_us" %}">{% trans "About us"|capfirst %}</a></li>
-                        {% if user.is_superuser or user.is_staff %}
-                            <li><a href="{% url "admin:index" %}">{% trans "admin"|title %}</a></li>
-                        {% endif %}
-                        <li><a href="{% url "profile_update" %}">{% trans "Setup"|title %}</a></li>
-                        <li><a href="{% url "logout" %}">{% trans "logout"|title %} <i class="fas fa-sign-out-alt"></i></a></li>
+                    <li class="logo">
+                        <a href="{% url "index" %}">
+                            <img src="{% static 'img/icon.svg' %}" alt="Logo Image">
+                        </a>
+                    </li>
+                    <li><a href="{% url "index" %}">{% trans "home"|title %}</a></li>
+                    <li><a href="{% url "chatadvice" %}">{% trans "advice"|title %}</a></li>
+                    <li><a href="{% url "about_us" %}">{% trans "About us"|capfirst %}</a></li>
+                    {% if user.is_superuser or user.is_staff %}
+                        <li><a href="{% url "admin:index" %}">{% trans "admin"|title %}</a></li>
+                    {% endif %}
+                    <li class="setup"><a href="{% url "profile_update" %}">{% trans "Setup"|title %}</a></li>
+                    <li><a href="{% url "logout" %}">{% trans "logout"|title %} <i class="fas fa-sign-out-alt"></i></a></li>
                 </ul>
             </header>
         {% endif %}

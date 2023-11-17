@@ -79,13 +79,24 @@ class Profile(models.Model):
        self.time_left = time_left
        self.save()
     
+import logging
+
+logger = logging.getLogger(__name__)
+
 @receiver(post_save, sender=Profile)
 def generate_chat_advice(sender, instance, created, **kwargs):
     if created or not instance.get_chat_advice():
         if instance.is_complete():
-            # Check if enough time has passed since the last execution
             cache_key = f'generate_chat_advice_last_run_{instance.user_id}'
             last_run_time = cache.get(cache_key)
-            if not last_run_time or timezone.now() - last_run_time > timezone.timedelta(minutes=2):
+            if not last_run_time or timezone.now() - last_run_time > timezone.timedelta(seconds=100):
+                cache.delete(cache_key)
                 generate_chat_advice_task.delay(instance.pk)
                 cache.set(cache_key, timezone.now(), timeout=100)
+    else:
+        cache_key = f'generate_chat_advice_last_run_{instance.user_id}'
+        last_run_time = cache.get(cache_key)
+        if not last_run_time or timezone.now() - last_run_time > timezone.timedelta(seconds=100):
+            cache.delete(cache_key)
+            generate_chat_advice_task.delay(instance.pk)
+            cache.set(cache_key, timezone.now(), timeout=100)

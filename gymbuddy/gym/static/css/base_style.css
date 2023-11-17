@@ -132,6 +132,7 @@ main {
 .logo img{
     width: 30px;
     height: 30px;
+    padding-right: 2.25rem;
 }
 header {
   background-color: rgb(0, 0, 0);
@@ -161,14 +162,13 @@ header ul.nav {
   margin: 0;
   text-align: center;
   align-items: center;
+  justify-content: center;
 }
 
 ul.nav li {
   margin: 0 0.5rem;
   padding: 0.5rem;
-}
-.centered {
-    margin: 0 auto; /* Move the "Home" and "Advice" to the center */
+  width: auto;
 }
 .num {
     color: #ff0000;
@@ -183,17 +183,30 @@ ul.nav {
 .box-success {
     background-color: #28a745;
     color: #fff;
+    text-align: center;
 }
 .box-error {
     background-color: #dc3545;
     color: #fff;
+    text-align: center;
 }
 .errorlist {
     background-color: #dc3545;
     color: #fff;
-    border: 1px solid #ddd;
     padding: 10px;
-    margin: 10px 0;
+    margin: 0;
+    text-align: center;
+    display: none;
+}
+.errorlist.nonfield {
+  display: block;
+}
+.reseterror {
+  background-color: #dc3545;
+  color: #fff;
+  padding: 10px;
+  margin: 0;
+  text-align: center;
 }
 footer {
   background-color: rgb(0, 0, 0);
