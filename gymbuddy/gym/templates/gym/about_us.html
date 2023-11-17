@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load i18n static %}
+{% block title %}{% trans "About us at"|capfirst %} {{block.super}}{% endblock title %}
+{% block content %}
+    {% if about_us %}
+        <div class="login-container1">
+            <form class='form-login1'>
+                <p>{{ about_us|safe }}</p>
+            </form>
+        </div>
+    {% endif %}
+{% endblock %}

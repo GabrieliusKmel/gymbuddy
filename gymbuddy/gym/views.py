@@ -3,6 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from user_profile.models import Profile
 from django.views import View
+from . import models
 
 
 @login_required
@@ -26,3 +27,10 @@ class ChatView(View):
         user_profile = Profile.objects.get(user=request.user)
         chat_advice = user_profile.get_chat_advice()
         return render(request, self.template_name, {'chat_advice': chat_advice})
+    
+class AboutUsView(LoginRequiredMixin, View):
+    template_name = 'gym/about_us.html'
+    def get(self, request, *args, **kwargs):
+        about_us = models.AboutUs.objects.first()
+        context = {'about_us': about_us}
+        return render(request, self.template_name, context)

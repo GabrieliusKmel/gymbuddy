@@ -28,6 +28,7 @@
                     </li>
                     <li><a href="{% url "index" %}">{% trans "home"|title %}</a></li>
                     <li><a href="{% url "chatadvice" %}">{% trans "advice"|title %}</a></li>
+                    <li><a href="{% url "about_us" %}">{% trans "About us"|title %}</a></li>
                     <li class="spacer"></li>
                     {% if user.is_superuser or user.is_staff %}
                         <li><a href="{% url "admin:index" %}">{% trans "admin"|title %}</a></li>

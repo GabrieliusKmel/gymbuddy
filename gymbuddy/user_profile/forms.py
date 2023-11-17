@@ -13,6 +13,10 @@ class ProfileUpdateForm(forms.ModelForm):
             'activity_level': forms.Select,
             'weight_goal': forms.Select,
         }
+        labels = {
+            'height': 'Height (cm):',
+            'weight': 'Weight (kg):',
+        }
 
     def clean(self):
         cleaned_data = super().clean()
