@@ -7,6 +7,8 @@ from django.dispatch import receiver
 from .tasks import generate_chat_advice_task
 from django.utils import timezone
 from datetime import timedelta
+from django.core.cache import cache
+
 
 
 class Profile(models.Model):
@@ -81,6 +83,9 @@ class Profile(models.Model):
 def generate_chat_advice(sender, instance, created, **kwargs):
     if created or not instance.get_chat_advice():
         if instance.is_complete():
-            generate_chat_advice_task.delay(instance.pk)
-    else:
-        generate_chat_advice_task.delay(instance.pk)
+            # Check if enough time has passed since the last execution
+            cache_key = f'generate_chat_advice_last_run_{instance.user_id}'
+            last_run_time = cache.get(cache_key)
+            if not last_run_time or timezone.now() - last_run_time > timezone.timedelta(minutes=2):
+                generate_chat_advice_task.delay(instance.pk)
+                cache.set(cache_key, timezone.now(), timeout=100)
