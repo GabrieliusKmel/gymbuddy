@@ -30,7 +30,7 @@ def profile_update(request: HttpRequest):
                 time_left_formatted = f"{time_left.seconds // 3600} hours and {(time_left.seconds // 60) % 60} minutes"
                 if user_profile.time_left < time_now:
                     messages.success(request, _('Your GymBuddy is generating! Please wait..'))
-                    return redirect('profile_update')
+                    return redirect('chatadvice')
                 else:
                     messages.error(request, _(f'You can generate GymBuddy again in {time_left_formatted}'))
                     return redirect('profile_update')
