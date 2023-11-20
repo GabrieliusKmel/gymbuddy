@@ -19,23 +19,26 @@ def profile_update(request: HttpRequest):
     if request.method == "POST":
         profile_form = forms.ProfileUpdateForm(request.POST, instance=request.user.profile)
         if profile_form.is_valid():
-            profile_form.save()
-            user_profile = request.user.profile
-            if not user_profile.chat_advice:
-                messages.success(request, _('Your first GymBuddy is generating! Please wait..'))
-                return redirect('profile_update')
-            else:
-                time_now = timezone.now()
-                time_left = user_profile.time_left - time_now
-                time_left_formatted = f"{time_left.seconds // 3600} hours and {(time_left.seconds // 60) % 60} minutes"
-                if user_profile.time_left < time_now:
-                    messages.success(request, _('Your GymBuddy is generating! Please wait..'))
-                    return redirect('chatadvice')
+                user_profile = request.user.profile
+                if 50 < user_profile.height <= 300 and 30 < user_profile.weight <= 300 and 10 < user_profile.age <= 100:
+                    profile_form.save()
+                    if not user_profile.chat_advice:
+                        messages.success(request, _('Your first GymBuddy is generating! Please wait..'))
+                        return redirect('profile_update')
+                    else:
+                        time_now = timezone.now()
+                        time_left = user_profile.time_left - time_now
+                        time_left_formatted = f"{time_left.seconds // 3600} hours and {(time_left.seconds // 60) % 60} minutes"
+                        if user_profile.time_left < time_now:
+                            messages.success(request, _('Your GymBuddy is generating! Please wait..'))
+                            return redirect('chatadvice')
+                        else:
+                            messages.error(request, _(f'You can generate GymBuddy again in {time_left_formatted}'))
+                            return redirect('profile_update')
                 else:
-                    messages.error(request, _(f'You can generate GymBuddy again in {time_left_formatted}'))
-                    return redirect('profile_update')
+                    messages.error(request, _(f'The weight can be from 30 to 300 kg, the height from 50 to 300 cm, and the age from 10 to 100 years.'))
         else:
-            messages.error(request, _('Please make sure to fill in all the required fields.'))
+            messages.error(request, _('The weight can be from 30 to 300 kg, the height from 50 to 300 cm, and the age from 10 to 100 years.'))
     else:
         profile_form = forms.ProfileUpdateForm(instance=request.user.profile)
     return render(request, 'user_profile/update.html', {

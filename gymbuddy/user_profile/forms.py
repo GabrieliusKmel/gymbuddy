@@ -24,10 +24,10 @@ class ProfileUpdateForm(forms.ModelForm):
         weight = cleaned_data.get('weight')
         gender = cleaned_data.get('gender')
         age = cleaned_data.get('age')
-        age = cleaned_data.get('activity_level')
-        age = cleaned_data.get('weight_goal')
+        activity_level = cleaned_data.get('activity_level')
+        weight_goal = cleaned_data.get('weight_goal')
 
-        if not height or not weight or not gender or not age:
+        if not height or not weight or not gender or not age or not 50 < height <= 300 or not 30 < weight <= 300 or not 10 < age <= 100:
             self._errors['__all__'] = self.error_class([])
             del cleaned_data['height']
             del cleaned_data['weight']
@@ -35,4 +35,5 @@ class ProfileUpdateForm(forms.ModelForm):
             del cleaned_data['age']
             del cleaned_data['activity_level']
             del cleaned_data['weight_goal']
+
         return cleaned_data
