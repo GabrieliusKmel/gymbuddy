@@ -28,7 +28,6 @@ body {
 .form-login p select {
   display: inline-block;
   min-width: 295px;
-  text-align: center;
 }
 
 .form-login input {
@@ -255,7 +254,7 @@ footer a:hover {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
   overflow: auto;
 }
 .login-container1 span {
@@ -415,11 +414,11 @@ footer a:hover {
 }
 @media only screen and (max-width: 600px) {
   header {
-    position: static; /* or position: relative; */
+    position: static;
   }
 
   footer {
-    position: static; /* or position: relative; */
+    position: static;
   }
 
   header ul.nav {
