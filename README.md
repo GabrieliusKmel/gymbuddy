@@ -12,7 +12,6 @@ GymBuddy is a Django project crafted by a student from Lithuania. This platform 
 - **OpenAI Integration:** Harness the power of OpenAI for intelligent and personalized meal and workout plans.
 - **Personalized Meal Plans:** Crafted meal plans aligned with your caloric needs, dietary preferences, and fitness goals.
 - **Tailored Workout Plans:** Generate workout plans catering to your fitness level, preferences, and specific target areas.
-- **Community Support:** Join a community of like-minded individuals striving for better health and receive guidance from our team of fitness experts.
 
 ## Installation
 
