@@ -325,14 +325,17 @@ footer a:hover {
   height: 100vh;
   text-align: center;
   color: #212738;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .mobileindex h3 {
   margin: 0;
-  padding: 2rem;
-  font-size: 11vw;
+  padding: 3rem;
+  font-size: 14vw;
   background-size: 100% 100%;
-  background-color: rgba(255, 255, 255, 0.4);
+  color: #d8d8d8;
+  background-color: rgba(45, 19, 118, 0.4);
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .mobile-link {
@@ -341,9 +344,14 @@ footer a:hover {
   width: 100%;
 }
 
-.mobileindex h3:hover {
-  background-color: rgba(255, 255, 255, 0.5);
-  color: #000000;
+.mobileindex:hover h3 {
+  background-color: rgba(45, 19, 118, 0.8);
+  text-shadow:
+      0 0 42px #f7137e,
+      0 0 82px #f7137e,
+      0 0 92px #f7137e,
+      0 0 102px #f7137e,
+      0 0 151px #f7137e;
 }
 
 .center h1 span{

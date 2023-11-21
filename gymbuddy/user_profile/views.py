@@ -24,14 +24,14 @@ def profile_update(request: HttpRequest):
                     profile_form.save()
                     if not user_profile.chat_advice:
                         messages.success(request, _('Your first GymBuddy is generating! Please wait..'))
-                        return redirect('profile_update')
+                        return redirect('chatadvice')
                     else:
                         time_now = timezone.now()
                         time_left = user_profile.time_left - time_now
                         time_left_formatted = f"{time_left.seconds // 3600} hours and {(time_left.seconds // 60) % 60} minutes"
                         if user_profile.time_left < time_now:
                             messages.success(request, _('Your GymBuddy is generating! Please wait..'))
-                            return redirect('chatadvice')
+                            return redirect('profile_update')
                         else:
                             messages.error(request, _(f'You can generate GymBuddy again in {time_left_formatted}'))
                             return redirect('profile_update')

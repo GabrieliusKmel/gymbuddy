@@ -90,11 +90,11 @@ def generate_chat_advice(sender, instance, created, **kwargs):
             if not last_run_time or timezone.now() - last_run_time > timezone.timedelta(seconds=100):
                 cache.delete(cache_key)
                 generate_chat_advice_task.delay(instance.pk)
-                cache.set(cache_key, timezone.now(), timeout=100)
+                cache.set(cache_key, timezone.now(), timeout=200)
     else:
         cache_key = f'generate_chat_advice_last_run_{instance.user_id}'
         last_run_time = cache.get(cache_key)
         if not last_run_time or timezone.now() - last_run_time > timezone.timedelta(seconds=100):
             cache.delete(cache_key)
             generate_chat_advice_task.delay(instance.pk)
-            cache.set(cache_key, timezone.now(), timeout=100)
+            cache.set(cache_key, timezone.now(), timeout=200)
