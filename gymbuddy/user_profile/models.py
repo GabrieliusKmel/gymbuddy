@@ -6,9 +6,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from .tasks import generate_chat_advice_task
 from django.utils import timezone
-from datetime import timedelta
 from django.core.cache import cache
-
 
 
 class Profile(models.Model):
